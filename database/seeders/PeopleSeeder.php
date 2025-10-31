@@ -9,59 +9,28 @@ class PeopleSeeder extends Seeder
 {
     public function run(): void
     {
-        $people = [
-            [
-                'name' => 'Emma',
-                'age' => 25,
-                'location' => 'Tokyo',
-                'picture' => 'https://picsum.photos/300/400?random=1'
-            ],
-            [
-                'name' => 'Liam', 
-                'age' => 28,
-                'location' => 'Osaka',
-                'picture' => 'https://picsum.photos/300/400?random=2'
-            ],
-            [
-                'name' => 'Olivia',
-                'age' => 23, 
-                'location' => 'Kyoto',
-                'picture' => 'https://picsum.photos/300/400?random=3'
-            ],
-            [
-                'name' => 'Noah',
-                'age' => 30,
-                'location' => 'Tokyo', 
-                'picture' => 'https://picsum.photos/300/400?random=4'
-            ],
-            [
-                'name' => 'Ava',
-                'age' => 26,
-                'location' => 'Yokohama',
-                'picture' => 'https://picsum.photos/300/400?random=5'
-            ],
-            [
-                'name' => 'William',
-                'age' => 29,
-                'location' => 'Tokyo',
-                'picture' => 'https://picsum.photos/300/400?random=6'
-            ],
-            [
-                'name' => 'Sophia',
-                'age' => 24,
-                'location' => 'Osaka',
-                'picture' => 'https://picsum.photos/300/400?random=7'
-            ],
-            [
-                'name' => 'James',
-                'age' => 31,
-                'location' => 'Kyoto',
-                'picture' => 'https://picsum.photos/300/400?random=8'
-            ],
+        // Clear existing data first
+        Person::truncate();
+
+        $locations = ['Tokyo', 'Osaka', 'Kyoto', 'Yokohama', 'Sapporo', 'Nagoya', 'Hiroshima', 'Fukuoka'];
+        $names = [
+            'Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'William', 'Sophia', 'James',
+            'Isabella', 'Benjamin', 'Mia', 'Lucas', 'Charlotte', 'Henry', 'Amelia', 'Alexander',
+            'Harper', 'Michael', 'Evelyn', 'Daniel', 'Abigail', 'Matthew', 'Emily', 'Jackson',
+            'Elizabeth', 'David', 'Sofia', 'Joseph', 'Ella', 'Samuel', 'Scarlett', 'John',
+            'Grace', 'Ryan', 'Chloe', 'Andrew', 'Victoria', 'Nathan', 'Riley', 'Jonathan',
+            'Aria', 'Joshua', 'Lily', 'Christian', 'Aubrey', 'Dylan', 'Zoey', 'Caleb',
+            'Hannah', 'Isaiah'
         ];
 
-        foreach ($people as $person) {
-            Person::create($person);
+        // Create 50 people with real names
+        for ($i = 0; $i < 50; $i++) {
+            Person::create([
+                'name' => $names[$i], // Use real names from the array
+                'age' => rand(20, 35),
+                'location' => $locations[array_rand($locations)],
+                'picture' => "https://picsum.photos/300/400?random=" . ($i + 1)
+            ]);
         }
     }
 }
